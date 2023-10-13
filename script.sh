@@ -37,7 +37,7 @@ done
 cd $1/workingfiles
 mkdir hsp70searches
 cd hsp70searches
-for file in $1../proteomes/*.fasta;
+for file in $1/proteomes/*.fasta;
 do
 	numb=$(echo $file | grep -Eo '[0-9]{2}')
 	/afs/crc.nd.edu/user/a/ahansris/Private/Biocomputing/tools/hmmsearch --tblout "proteome"$numb"hsp70.txt" $1/workingfiles/hsp70.hmm $file
@@ -49,9 +49,9 @@ cd $1/workingfiles
 for file in $1/proteomes/*.fasta;
 do
 	numb=$(echo $file | grep -Eo '[0-9]{2}')
-	mcrAcounts=$(grep -vc "#" "$1/mcrAsearches/proteome"$numb"mcrA.txt")
-	hsp70counts=$(grep -vc "#" "$1/hsp70searches/proteome"$numb"hsp70.txt")
-	echo "proteome"$numb $mcrAcounts $hsp70counts >> summary.csv
+	mcrAcounts=$(grep -vc "#" "$1/workingfiles/mcrAsearches/proteome"$numb"mcrA.txt")
+	hsp70counts=$(grep -vc "#" "$1/workingfiles/hsp70searches/proteome"$numb"hsp70.txt")
+	echo "proteome_"$numb","$mcrAcounts","$hsp70counts >> summary.csv
 done
 
 ## 8) creating a file of potential methanogens
